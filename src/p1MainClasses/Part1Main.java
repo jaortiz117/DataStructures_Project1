@@ -1,8 +1,11 @@
 package p1MainClasses;
+import java.io.FileNotFoundException;
+import interfaces.MySet;
 
 /**
  * 
  * @author Javier A. Ortiz García 802-16-4820
+ * @param <E>
  *
  */
 
@@ -16,5 +19,18 @@ public class Part1Main {
 //		From that input construct the objects corresponding to sets T0, T1, ... , Tm-1 as described.
 //		Apply the selected strategy (or each one of the four strategies) to construct the final intersection set  that results (or sets that result) from the particular input used; and then show results. 
 
+		
+		
 	}
+
+	
+	private static MySet<Integer>[] toSetArray() throws FileNotFoundException{
+		
+		
+		return null;
+	}
+	
 }
+	
+	
+
