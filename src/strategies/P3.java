@@ -9,7 +9,7 @@ import setIntersectionFinders.AbstractIntersectionFinder;
  *
  */
 
-public class P3 extends AbstractIntersectionFinder{
+public class P3<E> extends AbstractIntersectionFinder<E>{
 
 	public P3(String name) {
 		super(name);

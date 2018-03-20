@@ -8,7 +8,7 @@ import setIntersectionFinders.AbstractIntersectionFinder;
  * @author Javier A. Ortiz García 802-16-4820
  *
  */
-public class P4 extends AbstractIntersectionFinder{
+public class P4<E> extends AbstractIntersectionFinder<E>{
 
 	public P4(String name) {
 		super(name);

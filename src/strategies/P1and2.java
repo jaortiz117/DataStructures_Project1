@@ -12,7 +12,7 @@ import setIntersectionFinders.AbstractIntersectionFinder;
  * @author Javier A. Ortiz García 802-16-4820
  *
  */
-public class P1and2<E> extends AbstractIntersectionFinder{
+public class P1and2<E> extends AbstractIntersectionFinder<E>{
 
 	{
 	try {
@@ -32,6 +32,9 @@ public class P1and2<E> extends AbstractIntersectionFinder{
 	@Override
 	public MySet intersectSets(MySet[] t) {
 		// TODO Auto-generated method stub
+		
+		//make generic for types MySet1 and 2
+		
 		return null;
 	}
 
