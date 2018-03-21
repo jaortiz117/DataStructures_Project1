@@ -14,28 +14,38 @@ import setIntersectionFinders.AbstractIntersectionFinder;
  */
 public class P1and2<E> extends AbstractIntersectionFinder<E>{
 
-	{
-	try {
-		DataReader data = new DataReader();
-	}
-	catch (FileNotFoundException e){
-		e.printStackTrace();
-		}
-	}
-	
+//	{
+//	try {
+//		DataReader data = new DataReader();
+//	}
+//	catch (FileNotFoundException e){
+//		e.printStackTrace();
+//		}
+//	}
+//	
 	
 	public P1and2(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public MySet intersectSets(MySet[] t) {
+	public MySet<E> intersectSets(MySet<E>[] t) {
 		// TODO Auto-generated method stub
 		
 		//make generic for types MySet1 and 2
 		
-		return null;
+		MySet<E> result = t[0];
+		
+		for(E item : result) {
+			for(int j = 0; j<t.length; j++) {
+				if(!(t[j].contains(item))) {
+					result.remove(item);
+				}
+			}
+		}
+		
+		
+		return result;
 	}
 
 }
