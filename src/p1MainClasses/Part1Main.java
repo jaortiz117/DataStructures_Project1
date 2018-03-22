@@ -1,8 +1,12 @@
 package p1MainClasses;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 import dataGenerator.DataReader;
 import interfaces.MySet;
+import mySetImplementations.Set1;
+import strategies.P1and2;
 
 /**
  * 
@@ -12,7 +16,7 @@ import interfaces.MySet;
 
 public class Part1Main {
 
-	public static void main(String[] args){
+	public static void main(String[] args) throws FileNotFoundException{
 		//TODO
 //		Read all the input data; in particular, 
 //		Read an initial file named parameters.txt, that contains the two integer values for n and m, in that order and one per line. 
@@ -22,11 +26,32 @@ public class Part1Main {
 
 		
 		//TODO: check if necessary. perhaps files are generated beforehand
+		//calls file generator class
 		try {
 			FilesGeneratorMain.main(new String[0]);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		
+		//reading data
+		
+		DataReader reader = new DataReader();
+		Integer[][][] data = (Integer[][][]) reader.readDataFiles();
+		
+		MySet<Integer>[] t1 = new MySet[data[0].length];//set for P1
+		MySet<Integer>[] t2 = new MySet[data[0].length];//set for P2
+		
+		
+		//creates union of all data sets in Set1//TODO: make generic for all strategies
+		for (int j = 0; j < data[0].length; j++) {
+			t1[j] = new Set1<>();
+			for (int i = 0; i < data.length; i++) {
+				for (int k= 0; k < data[i][j].length; k++) {
+					t1[j].add(data[i][j][k]);
+				}
+			}
+			
 		}
 		
 		//read input from args
@@ -39,7 +64,7 @@ public class Part1Main {
 		else 
 			System.out.println("Invalid number of parameters. Must be <= 1.");
 		
-		switch(arg) {
+		switch(arg) {//maybe use for loop to make cleaner
 		case 1:
 			//print: Final Set by P1
 			break;
@@ -58,18 +83,18 @@ public class Part1Main {
 
 		default:
 			//print: Final Set by all P's
+			System.out.println("Final Set by P1: " + (new P1and2<Integer>("P1").intersectSets(t1)));
 			break;
 		}
 	}
 
-	
+	/**
+	 * Converts list of multiple arrays into a single array for input in P3 and P4
+	 * @return single list of all data
+	 * @throws FileNotFoundException
+	 */
 	private static MySet<Integer>[] toSetArray() throws FileNotFoundException{
 		
-		DataReader reader = new DataReader();
-		
-		Integer[][][] data = (Integer[][][]) reader.readDataFiles();
-		
-		//TODO: change from Integer array into MySet object
 		return null;
 	}
 	

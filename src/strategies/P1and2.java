@@ -32,7 +32,7 @@ public class P1and2<E> extends AbstractIntersectionFinder<E>{
 	public MySet<E> intersectSets(MySet<E>[] t) {
 		// TODO Auto-generated method stub
 		
-		//make generic for types MySet1 and 2
+		//make generic for types Set1 and 2
 		
 		MySet<E> result = t[0];
 		
