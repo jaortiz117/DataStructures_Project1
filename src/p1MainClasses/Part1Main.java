@@ -23,10 +23,6 @@ import strategies.P4;
 public class Part1Main {
 	
 	private static final int P1 = 1;
-//	private static final int P2 = 2;
-//	private static final int P3 = 3;
-//	private static final int P4 = 4;
-
 
 	public static void main(String[] args) throws FileNotFoundException{
 		//TODO
