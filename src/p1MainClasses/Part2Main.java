@@ -2,6 +2,7 @@ package p1MainClasses;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.sql.Array;
 import java.sql.ResultSet;
@@ -24,9 +25,9 @@ import strategies.P3;
 import strategies.P4;
 
 /**
- * 
- * @author Javier A. Ortiz 802-16-4820
- * @author Jose A. Velazquez Torres 802-14-8632
+ * Runs the time complexity experiments for each of the strategies
+ * @author Javier A. Ortiz 802-16-4820 section 070
+ * @author Jose A. Velazquez Torres 802-14-8632 section 070
  *
  */
 
@@ -36,30 +37,25 @@ public class Part2Main {
 	
 	/**
 	 * Collection of strategies to be used when testing
-	 * @author MoCkY1998
+	 * @author Javier Ortiz
+	 * @author Jose Velazquez
 	 *
 	 * @param <T>
 	 */
 	private static class StrategiesTimeCollection {
 		
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		
-		//private ArrayList<IntersectionFinder<T>> elements; 
 		private IntersectionFinder<Integer> strategy;
-		private HashMap<Integer, Float> map;
+		private Set1<SimpleEntry<Integer, Float>> experiments;
 		private int sum;
 		
 		public StrategiesTimeCollection(IntersectionFinder<Integer> strategy) {
-			//elements = new ArrayList<>();
 			this.strategy = strategy;
 			this.sum = 0;
+			this.experiments = new Set1<SimpleEntry<Integer, Float>>();
 		}
 		
 		/**
-		 * Resets current su to 0
+		 * Resets current sum to 0
 		 */
 		public void resetSum() {
 			this.sum = 0;
@@ -109,10 +105,21 @@ public class Part2Main {
 			return ""+this.strategy.getName()+", sum: "+ this.getSum();
 		}
 
-		public void add(SimpleEntry<Integer, Float> simpleEntry) {
+		public void add(SimpleEntry<Integer, Float> sizeTime) {
+			experiments.add(sizeTime);
+		}
+
+		public String getStrategyName() {
+			return strategy.getName();
+		}
+
+		public int size() {
 			// TODO Auto-generated method stub
-			
-			 
+			return experiments.size();
+		}
+		
+		public SimpleEntry<Integer, Float> get(int index){
+			return experiments.get(index);
 		}
 	}
 	
@@ -122,12 +129,15 @@ public class Part2Main {
 	private static int fSize;
 	private static int iStep;
 	private static int rep;
+	private static ArrayList<StrategiesTimeCollection> resultsPerStrategy = new ArrayList<StrategiesTimeCollection>();
+
 
 	/**
 	 * Main method for part 2
 	 * @param args
+	 * @throws FileNotFoundException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 
 		if (args.length <= 6) {
 			n = 10; 
@@ -140,11 +150,11 @@ public class Part2Main {
 				n = Integer.parseInt(args[0]); 
 			if (args.length >= 2) 
 				m = Integer.parseInt(args[1]); 
-			if (args.length == 3) 
+			if (args.length >= 3) 
 				iSize = Integer.parseInt(args[2]);
-			if (args.length == 4) 
+			if (args.length >= 4) 
 				fSize = Integer.parseInt(args[3]);
-			if (args.length == 5) 
+			if (args.length >= 5) 
 				iStep = Integer.parseInt(args[4]);
 			if (args.length == 6) 
 				rep = Integer.parseInt(args[5]);
@@ -152,9 +162,7 @@ public class Part2Main {
 		else 
 			System.out.println("Invalid number of parameters. Must be <= 6.");
 		
-		
-		ArrayList<StrategiesTimeCollection> resultsPerStrategy = new ArrayList<StrategiesTimeCollection>();
-		System.out.println(""+new StrategiesTimeCollection(new P1and2<Integer>("P1")));
+		//init resultsPerStrategy ArrayList
 		resultsPerStrategy.add(new StrategiesTimeCollection(new P1and2<Integer>("P1")));
 		resultsPerStrategy.add(new StrategiesTimeCollection(new P1and2<Integer>("P2")));
 		resultsPerStrategy.add(new StrategiesTimeCollection(new P3<Integer>("P3")));
@@ -189,13 +197,15 @@ public class Part2Main {
 				}
 			}
 			// For each strategy, compute the average time for the current size.	
-			for (StrategiesTimeCollection strategy : resultsPerStrategy)
+			for (StrategiesTimeCollection strategy : resultsPerStrategy) {
 				strategy.add( new AbstractMap.SimpleEntry<Integer, Float>
 				(size, (strategy.getSum()/((float) rep)))
 						); 
+			}
 		}
-
-
+		
+		saveResults();
+		System.out.println("Success!!!");
 	}
 	
 	/**
@@ -209,7 +219,29 @@ public class Part2Main {
 		DataGenerator dg = new DataGenerator(n, m, size);
 		Object[][][] setsLists = dg.generateData();
 		return setsLists;  
+	}
+	
+	/**
+	 * Saves the results from main calculation into text file
+	 * @throws FileNotFoundException
+	 */
+	public static void saveResults() throws FileNotFoundException { 
 
+		PrintStream out = new PrintStream(new File("experimentalResults", "allResults.txt"));
+		out.print("Size");
+		for (StrategiesTimeCollection trc : resultsPerStrategy) 
+			out.print("\t" + trc.getStrategyName()); 
+		out.println();
+
+		int numberOfExperiments = resultsPerStrategy.get(0).size(); 
+		for (int i=0; i<numberOfExperiments; i++) {
+			out.print(resultsPerStrategy.get(0).get(i).getKey());
+			for (StrategiesTimeCollection trc : resultsPerStrategy)
+				out.print("\t" + trc.get(i).getValue());
+			out.println(); 
+		}
+
+		out.close();
 
 	}
 

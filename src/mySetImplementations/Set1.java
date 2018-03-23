@@ -39,6 +39,15 @@ public class Set1<E> extends AbstractMySet<E> {
 	      return elements.iterator(); 
 	   } 
 	   
+	   /**
+	    * returns item at specified index
+	    * @param index
+	    * @return item
+	    */
+	   public E get(int index) {
+		   return elements.get(index);
+	   }
+	   
 	   public Object clone() throws CloneNotSupportedException { 
 		   Set1<E> setClone = new Set1<>(); 
 		   setClone.elements = (ArrayList<E>) this.elements.clone(); 
