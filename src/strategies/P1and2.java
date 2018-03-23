@@ -28,7 +28,12 @@ public class P1and2<E> extends AbstractIntersectionFinder<E>{
 		super(name);
 	}
 
-	@Override
+	/**
+	 * Finds the intersection of sets
+	 * 
+	 * @param t Set t is union of data from input files
+	 * @return intersection of all sets t
+	 */
 	public MySet<E> intersectSets(MySet<E>[] t) {
 		// TODO Auto-generated method stub
 		

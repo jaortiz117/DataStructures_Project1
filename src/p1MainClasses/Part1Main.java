@@ -32,7 +32,6 @@ public class Part1Main {
 //		From that input construct the objects corresponding to sets T0, T1, ... , Tm-1 as described.
 //		Apply the selected strategy (or each one of the four strategies) to construct the final intersection set  that results (or sets that result) from the particular input used; and then show results. 
 
-		
 		//TODO: check if necessary. perhaps files are generated beforehand
 		//calls file generator class
 		try {
