@@ -1,5 +1,6 @@
 package strategies;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import interfaces.MySet;
@@ -22,14 +23,38 @@ public class P3<E> extends AbstractIntersectionFinder<E>{
 
 	@Override
 	public MySet intersectSets(MySet[] t) {
-		MySet<E> p = new Set2();
 		
+		//create union of all items in t
 		
+		ArrayList<E> allElements = new ArrayList<>();
+		
+		for(MySet<E> i : t) {
+			E[] e = (E[]) i.toArray(new Object[i.size()]);
+			for (int j = 0; j < e.length; j++) {
+				allElements.add(e[j]);
+			}
+		}
+		
+		allElements.sort(null);
+		MySet<E> result = new Set2();  // sets in P3's solution are of type Set2
+		E e = allElements.get(0); 
+		Integer c = 1;
+		for (int i=1; i < allElements.size(); i++) {
+		    if (allElements.get(i).equals(e)) 
+		       c++;
+		    else { 
+		       if (c == t.length) 
+		          result.add(e);    // m is as in the previous discussion
+		       e = allElements.get(i); 
+		       c = 1; 
+		    } 
+		}
+		if (c == t.length)
+		    result.add(allElements.get(allElements.size()-1));
 
-	
+
 		
-		
-		return null;
+		return result;
 	}
 
 }
