@@ -70,9 +70,12 @@ public class Part1Main {
 					+ strategies.get(arg-1).intersectSets(dataSet));
 		}
 		else {
+			int i = 1;
 			for(IntersectionFinder<Integer> p : strategies) {
+				dataSet = toSetArray(i);
 				System.out.println("Final Set by "+ p.getName() + ": "
 						+ p.intersectSets(dataSet));
+				i++;
 			}	
 		}
 	}
