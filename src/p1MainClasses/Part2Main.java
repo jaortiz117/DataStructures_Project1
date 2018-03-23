@@ -48,17 +48,18 @@ public class Part2Main {
 		
 		//private ArrayList<IntersectionFinder<T>> elements; 
 		private IntersectionFinder<Integer> strategy;
-		private HashMap<Integer, Float> map;
+		private HashMap<Integer, Float> outputMap;
 		private int sum;
 		
 		public StrategiesTimeCollection(IntersectionFinder<Integer> strategy) {
 			//elements = new ArrayList<>();
 			this.strategy = strategy;
 			this.sum = 0;
+			this.outputMap = new HashMap<Integer, Float>();
 		}
 		
 		/**
-		 * Resets current su to 0
+		 * Resets current sum to 0
 		 */
 		public void resetSum() {
 			this.sum = 0;
@@ -108,10 +109,14 @@ public class Part2Main {
 			return ""+this.strategy.getName()+", sum: "+ this.getSum();
 		}
 
-		public void add(SimpleEntry<Integer, Float> simpleEntry) {
+		public void add(SimpleEntry<Integer, Float> sizeTime) {
 			// TODO Auto-generated method stub
 			
-			 
+			 outputMap.put(sizeTime.getKey(), sizeTime.getValue());
+		}
+		
+		public HashMap<Integer, Float> getOutput(){
+			return outputMap;
 		}
 	}
 	
@@ -153,7 +158,6 @@ public class Part2Main {
 		
 		
 		ArrayList<StrategiesTimeCollection> resultsPerStrategy = new ArrayList<StrategiesTimeCollection>();
-		System.out.println(""+new StrategiesTimeCollection(new P1and2<Integer>("P1")));
 		resultsPerStrategy.add(new StrategiesTimeCollection(new P1and2<Integer>("P1")));
 		resultsPerStrategy.add(new StrategiesTimeCollection(new P1and2<Integer>("P2")));
 		resultsPerStrategy.add(new StrategiesTimeCollection(new P3<Integer>("P3")));
@@ -188,12 +192,16 @@ public class Part2Main {
 				}
 			}
 			// For each strategy, compute the average time for the current size.	
-			for (StrategiesTimeCollection strategy : resultsPerStrategy)
+			for (StrategiesTimeCollection strategy : resultsPerStrategy) {
+				System.out.println(""+strategy);
 				strategy.add( new AbstractMap.SimpleEntry<Integer, Float>
 				(size, (strategy.getSum()/((float) rep)))
 						); 
+			}
 		}
-
+		
+		System.out.println(""+resultsPerStrategy.get(1).getOutput());
+		System.out.println("Success!!!");
 
 	}
 	
