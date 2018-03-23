@@ -11,20 +11,10 @@ import setIntersectionFinders.AbstractIntersectionFinder;
 
 /** 
  * 
- * @author Javier A. Ortiz García 802-16-4820
+ * @author Javier A. Ortiz García 802-16-4820 section 070
  *
  */
 public class P1and2<E> extends AbstractIntersectionFinder<E>{
-
-//	{
-//	try {
-//		DataReader data = new DataReader();
-//	}
-//	catch (FileNotFoundException e){
-//		e.printStackTrace();
-//		}
-//	}
-//	
 	
 	public P1and2(String name) {
 		super(name);
@@ -36,11 +26,8 @@ public class P1and2<E> extends AbstractIntersectionFinder<E>{
 	 * @param t Set t is union of data from input files
 	 * @return intersection of all sets t
 	 */
-	public MySet<E> intersectSets(MySet<E>[] t) {
-		// TODO Auto-generated method stub
-		
-		//make generic for types Set1 and 2
-		
+	public MySet<E> intersectSets(MySet<E>[] t) {				
+		//Depending on strategy the set to be generated
 		MySet<E> result = null;
 		try {
 			if(this.getName().equals("P1"))
@@ -48,7 +35,6 @@ public class P1and2<E> extends AbstractIntersectionFinder<E>{
 			else
 				result = (Set2<E>) t[0].clone();
 		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

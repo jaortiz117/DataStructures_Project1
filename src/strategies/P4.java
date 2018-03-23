@@ -10,14 +10,13 @@ import setIntersectionFinders.AbstractIntersectionFinder;
 
 /**
  * 
- * @author Javier A. Ortiz García 802-16-4820
+ * @author Javier A. Ortiz García 802-16-4820 section 070
  *
  */
 public class P4<E> extends AbstractIntersectionFinder<E>{
 
 	public P4(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -27,8 +26,6 @@ public class P4<E> extends AbstractIntersectionFinder<E>{
 	 */
 	@Override
 	public MySet<E> intersectSets(MySet<E>[] t) {
-
-		//Set2<E>[] t2 = (Set2<E>[]) t;
 		
 		//create union of all items in t
 		ArrayList<E> allElements = new ArrayList<>();

@@ -25,8 +25,8 @@ import strategies.P3;
 import strategies.P4;
 
 /**
- * 
- * @author Javier A. Ortiz 802-16-4820
+ * Runs the time complexity experiments for each of the strategies
+ * @author Javier A. Ortiz 802-16-4820 section 070
  *
  */
 
@@ -36,20 +36,20 @@ public class Part2Main {
 	
 	/**
 	 * Collection of strategies to be used when testing
-	 * @author MoCkY1998
+	 * @author Javier Ortiz
 	 *
 	 * @param <T>
 	 */
 	private static class StrategiesTimeCollection {
 		
 		private IntersectionFinder<Integer> strategy;
-		private ArrayList<SimpleEntry<Integer, Float>> experiments;
+		private Set1<SimpleEntry<Integer, Float>> experiments;
 		private int sum;
 		
 		public StrategiesTimeCollection(IntersectionFinder<Integer> strategy) {
 			this.strategy = strategy;
 			this.sum = 0;
-			this.experiments = new ArrayList<SimpleEntry<Integer, Float>>();
+			this.experiments = new Set1<SimpleEntry<Integer, Float>>();
 		}
 		
 		/**
