@@ -1,12 +1,18 @@
 package p1MainClasses;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import dataGenerator.DataReader;
+import interfaces.IntersectionFinder;
 import interfaces.MySet;
 import mySetImplementations.Set1;
+import mySetImplementations.Set2;
 import strategies.P1and2;
+import strategies.P3;
+import strategies.P4;
+
 
 /**
  * 
@@ -15,6 +21,12 @@ import strategies.P1and2;
  */
 
 public class Part1Main {
+	
+	private static final int P1 = 1;
+//	private static final int P2 = 2;
+//	private static final int P3 = 3;
+//	private static final int P4 = 4;
+
 
 	public static void main(String[] args) throws FileNotFoundException{
 		//TODO
@@ -34,26 +46,6 @@ public class Part1Main {
 			e.printStackTrace();
 		}
 		
-		//reading data
-		
-		DataReader reader = new DataReader();
-		Integer[][][] data = (Integer[][][]) reader.readDataFiles();
-		
-		MySet<Integer>[] t1 = new MySet[data[0].length];//set for P1
-		MySet<Integer>[] t2 = new MySet[data[0].length];//set for P2
-		
-		
-		//creates union of all data sets in Set1//TODO: make generic for all strategies
-		for (int j = 0; j < data[0].length; j++) {
-			t1[j] = new Set1<>();
-			for (int i = 0; i < data.length; i++) {
-				for (int k= 0; k < data[i][j].length; k++) {
-					t1[j].add(data[i][j][k]);
-				}
-			}
-			
-		}
-		
 		//read input from args
 		int arg = -1;
 		
@@ -64,27 +56,24 @@ public class Part1Main {
 		else 
 			System.out.println("Invalid number of parameters. Must be <= 1.");
 		
-		switch(arg) {//maybe use for loop to make cleaner
-		case 1:
-			//print: Final Set by P1
-			break;
-			
-		case 2:
-			//print: Final Set by P2
-			break;
-			
-		case 3:
-			//print: Final Set by P3
-			break;
-			
-		case 4:
-			//print: Final Set by P4
-			break;
-
-		default:
-			//print: Final Set by all P's
-			System.out.println("Final Set by P1: " + (new P1and2<Integer>("P1").intersectSets(t1)));
-			break;
+		MySet<Integer>[] dataSet = toSetArray(arg);
+		
+		ArrayList<IntersectionFinder<Integer>> strategies = new ArrayList<IntersectionFinder<Integer>>();
+		strategies.add(new P1and2<Integer>("P1"));
+		strategies.add(new P1and2<Integer>("P2"));
+		strategies.add(new P3<Integer>("P3"));
+		strategies.add(new P4<Integer>("P4"));
+		
+		//print output
+		if(arg != -1) {
+			System.out.println("Final Set by "+ strategies.get(arg-1).getName() + ": "
+					+ strategies.get(arg-1).intersectSets(dataSet));
+		}
+		else {
+			for(IntersectionFinder<Integer> p : strategies) {
+				System.out.println("Final Set by "+ p.getName() + ": "
+						+ p.intersectSets(dataSet));
+			}	
 		}
 	}
 
@@ -93,9 +82,28 @@ public class Part1Main {
 	 * @return single list of all data
 	 * @throws FileNotFoundException
 	 */
-	private static MySet<Integer>[] toSetArray() throws FileNotFoundException{
+	private static MySet<Integer>[] toSetArray(int arg) throws FileNotFoundException{
+		//reading data
+		DataReader reader = new DataReader();
+		Integer[][][] data = (Integer[][][]) reader.readDataFiles();
+
+		MySet<Integer>[] t = new MySet[data[0].length];
+
+		//creates union of all data sets in Set t
+		for (int j = 0; j < data[0].length; j++) {
+			if(arg == P1)
+				t[j] = new Set1<>();
+			else
+				t[j] = new Set2<>();
+				
+			for (int i = 0; i < data.length; i++) {
+				for (int k= 0; k < data[i][j].length; k++) {
+					t[j].add(data[i][j][k]);
+				}
+			}
+		}
 		
-		return null;
+		return t;
 	}
 	
 }
