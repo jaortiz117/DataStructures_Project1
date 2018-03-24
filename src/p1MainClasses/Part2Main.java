@@ -37,8 +37,8 @@ public class Part2Main {
 	
 	/**
 	 * Collection of strategies to be used when testing
-	 * @author Javier Ortiz
-	 * @author Jose Velazquez
+	 * @author Javier A. Ortiz García 802-16-4820
+	 * @author Jose A. Velazquez Torres 802-14-8632
 	 *
 	 * @param <T>
 	 */

@@ -9,8 +9,8 @@ import setIntersectionFinders.AbstractIntersectionFinder;
 
 /**
  * 
- * @author Javier A. Ortiz García 802-16-4820
- * @author Jose A. Velazquez Torres 802-14-8632
+ * @author Javier A. Ortiz García 802-16-4820 section 070
+ * @author Jose A. Velazquez Torres 802-14-8632 section 070
  *
  */
 
